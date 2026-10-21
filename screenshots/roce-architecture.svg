@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" width="1200" height="700">
+  <defs>
+    <linearGradient id="archBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a0e17"/>
+      <stop offset="100%" stop-color="#121826"/>
+    </linearGradient>
+    <linearGradient id="gpuGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#059669"/>
+      <stop offset="100%" stop-color="#10b981"/>
+    </linearGradient>
+    <linearGradient id="switchGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1d4ed8"/>
+      <stop offset="100%" stop-color="#3b82f6"/>
+    </linearGradient>
+    <linearGradient id="spineGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#7c3aed"/>
+      <stop offset="100%" stop-color="#a855f7"/>
+    </linearGradient>
+    <marker id="arrowData" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#06b6d4"/>
+    </marker>
+    <marker id="arrowPfc" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#f43f5e"/>
+    </marker>
+    <marker id="arrowCnp" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#f59e0b"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="700" fill="url(#archBg)"/>
+
+  <!-- Title -->
+  <text x="600" y="50" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="22" font-weight="bold" fill="#f1f5f9">Zero-Trust Lossless RoCEv2 AI Fabric Architecture</text>
+  <text x="600" y="75" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#94a3b8">PFC Flow Control, DCQCN ECN Marking, and Buffer Headroom Mechanics</text>
+
+  <!-- Node A (Sender) -->
+  <rect x="70" y="240" width="200" height="260" rx="10" fill="#182234" stroke="#059669" stroke-width="2"/>
+  <rect x="70" y="240" width="200" height="40" rx="10" fill="url(#gpuGrad)"/>
+  <text x="170" y="265" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="bold" fill="#ffffff">GPU SENDER NODE</text>
+  <text x="170" y="305" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#f1f5f9">NVIDIA B200 / Hopper</text>
+  <text x="170" y="325" text-anchor="middle" font-family="monospace" font-size="11" fill="#10b981">ConnectX-8 (800Gbps)</text>
+  
+  <rect x="90" y="350" width="160" height="70" rx="6" fill="#0e1522" stroke="#24344d"/>
+  <text x="170" y="375" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="bold" fill="#f59e0b">DCQCN Rate Limiter</text>
+  <text x="170" y="395" text-anchor="middle" font-family="monospace" font-size="10" fill="#94a3b8">Rc = Rc * (1 - α/2)</text>
+  <text x="170" y="410" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="9" fill="#64748b">Throttles on CNP Receipt</text>
+
+  <rect x="90" y="435" width="160" height="45" rx="6" fill="#0e1522" stroke="#24344d"/>
+  <text x="170" y="455" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="bold" fill="#f43f5e">PFC Flow Control Rx</text>
+  <text x="170" y="470" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="9" fill="#94a3b8">Pauses priority 3 queue</text>
+
+  <!-- Leaf Switch 1 -->
+  <rect x="370" y="240" width="190" height="260" rx="10" fill="#182234" stroke="#1d4ed8" stroke-width="2"/>
+  <rect x="370" y="240" width="190" height="40" rx="10" fill="url(#switchGrad)"/>
+  <text x="465" y="265" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="bold" fill="#ffffff">LEAF SWITCH 1</text>
+  <text x="465" y="300" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#38bdf8">Tomahawk 5 (400ns)</text>
+
+  <rect x="385" y="320" width="160" height="110" rx="6" fill="#0e1522" stroke="#24344d"/>
+  <text x="465" y="340" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="bold" fill="#f1f5f9">Ingress MMU Buffer</text>
+  <text x="465" y="360" text-anchor="middle" font-family="monospace" font-size="10" fill="#10b981">Headroom: 96 KB</text>
+  <text x="465" y="380" text-anchor="middle" font-family="monospace" font-size="10" fill="#f59e0b">Xoff: 96 KB</text>
+  <text x="465" y="400" text-anchor="middle" font-family="monospace" font-size="10" fill="#38bdf8">Xon: 78 KB (Hysteresis)</text>
+  <text x="465" y="420" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="9" fill="#94a3b8">Zero-Drop Guarantee</text>
+
+  <rect x="385" y="445" width="160" height="40" rx="6" fill="#0e1522" stroke="#24344d"/>
+  <text x="465" y="465" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="bold" fill="#f43f5e">PFC Watchdog (100ms)</text>
+  <text x="465" y="478" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="9" fill="#94a3b8">Auto-Drop Deadlock Break</text>
+
+  <!-- Spine Switch (Congested Egress) -->
+  <rect x="660" y="140" width="200" height="260" rx="10" fill="#182234" stroke="#7c3aed" stroke-width="2"/>
+  <rect x="660" y="140" width="200" height="40" rx="10" fill="url(#spineGrad)"/>
+  <text x="760" y="165" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="bold" fill="#ffffff">SPINE SWITCH</text>
+  <text x="760" y="200" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#c084fc">800G Spine Core</text>
+
+  <rect x="675" y="220" width="170" height="110" rx="6" fill="#0e1522" stroke="#24344d"/>
+  <text x="760" y="240" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="bold" fill="#f1f5f9">Egress WRED / ECN</text>
+  <text x="760" y="260" text-anchor="middle" font-family="monospace" font-size="10" fill="#38bdf8">Kmin: 64 KB (Start)</text>
+  <text x="760" y="280" text-anchor="middle" font-family="monospace" font-size="10" fill="#f59e0b">Kmax: 256 KB (100%)</text>
+  <text x="760" y="300" text-anchor="middle" font-family="monospace" font-size="10" fill="#10b981">Pmax: 20% Prob</text>
+  <text x="760" y="320" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="9" fill="#94a3b8">Marks IP.ECN = 11 (CE)</text>
+
+  <rect x="675" y="345" width="170" height="40" rx="6" fill="#0e1522" stroke="#24344d"/>
+  <text x="760" y="365" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="bold" fill="#a855f7">Strict Hierarchy</text>
+  <text x="760" y="378" text-anchor="middle" font-family="monospace" font-size="9" fill="#38bdf8">Kmin &lt; Kmax &lt; Xoff</text>
+
+  <!-- Node B (Receiver) -->
+  <rect x="960" y="240" width="190" height="260" rx="10" fill="#182234" stroke="#059669" stroke-width="2"/>
+  <rect x="960" y="240" width="190" height="40" rx="10" fill="url(#gpuGrad)"/>
+  <text x="1055" y="265" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="bold" fill="#ffffff">GPU RECEIVER</text>
+  <text x="1055" y="305" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#f1f5f9">NVIDIA B200 / Hopper</text>
+
+  <rect x="975" y="340" width="160" height="80" rx="6" fill="#0e1522" stroke="#24344d"/>
+  <text x="1055" y="365" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="bold" fill="#f59e0b">CNP Generation</text>
+  <text x="1055" y="385" text-anchor="middle" font-family="monospace" font-size="10" fill="#38bdf8">Opcode: 0x81</text>
+  <text x="1055" y="405" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="9" fill="#94a3b8">Generates CNP upon CE packet</text>
+
+  <!-- Flow Lines -->
+  <!-- 1. Forward RoCEv2 Data: Sender -> Leaf 1 -> Spine -> Receiver -->
+  <path d="M 270 300 L 370 300" stroke="#06b6d4" stroke-width="3" fill="none" marker-end="url(#arrowData)"/>
+  <path d="M 560 300 L 660 220" stroke="#06b6d4" stroke-width="3" fill="none" marker-end="url(#arrowData)"/>
+  <path d="M 860 220 L 960 300" stroke="#06b6d4" stroke-width="3" fill="none" marker-end="url(#arrowData)"/>
+  <text x="320" y="290" text-anchor="middle" font-family="monospace" font-size="10" fill="#06b6d4">RoCEv2 Data</text>
+
+  <!-- 2. PFC Pause Frame: Leaf 1 -> Sender (Reverse direction on congestion) -->
+  <path d="M 370 450 L 270 450" stroke="#f43f5e" stroke-width="3" stroke-dasharray="6,4" fill="none" marker-end="url(#arrowPfc)"/>
+  <text x="320" y="440" text-anchor="middle" font-family="monospace" font-size="10" fill="#f43f5e">PFC Pause (Xoff)</text>
+
+  <!-- 3. CNP Feedback: Receiver -> Sender (Reverse path via DSCP 48) -->
+  <path d="M 960 480 C 800 620, 400 620, 270 480" stroke="#f59e0b" stroke-width="3" stroke-dasharray="6,4" fill="none" marker-end="url(#arrowCnp)"/>
+  <text x="600" y="605" text-anchor="middle" font-family="monospace" font-size="11" font-weight="bold" fill="#f59e0b">CNP Congestion Notification Feedback (Opcode 0x81, DSCP 48 High Priority)</text>
+</svg>
